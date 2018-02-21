@@ -46,7 +46,11 @@ class NoteManager():
                 note.setAlive(True)
                 return None         
     def update(self, dt, zither):
+        scoreupdate = 0
         for note in self.Notes:
             note.update(dt)
-            if (note.getAABB().colliderect(zither.getButton(note.getIndex()).getAABB()) and zither.getButton(note.getIndex()).getDown()):
-                note.setAlive(False)
+            if (note.getAlive()):
+                if (note.getAABB().colliderect(zither.getButton(note.getIndex()).getAABB()) and zither.getButton(note.getIndex()).getDown()):
+                    scoreupdate += int(abs(note.getY() - zither.getButton(note.getIndex()).getY()))
+                    note.setAlive(False)
+        return scoreupdate

@@ -10,6 +10,7 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
     game = Game()
     screen = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("zither hero")
     clock.tick()
     while (True):
         screen.fill(pygame.Color(135, 206, 235))

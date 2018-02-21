@@ -11,7 +11,11 @@ class Game():
         self.notemanager = NoteManager()
         self.zither = Zither()
         self.timer = 0
+        self.font = pygame.font.Font(None, 64)
+        self.score = 0
     def render(self, screen):
+        score_ = self.font.render("Score: " + str(self.score), 0, pygame.Color(255, 255, 255))
+        screen.blit(score_, (0, 0))
         self.zither.render(screen)
         self.notemanager.render(screen)
     def update(self, dt):
@@ -26,4 +30,4 @@ class Game():
             self.timer = 0
         self.input.update()
         self.zither.update(dt, self.input)
-        self.notemanager.update(dt, self.zither)
+        self.score += self.notemanager.update(dt, self.zither)
