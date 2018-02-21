@@ -1,36 +1,21 @@
 from pygame import *
 from pygame.locals import *
-
-class BaseObject():
-    def __init__(self, x, y, color):
-        self.x = x
-        self.y = y
-        self.surface = Surface((60, 60))
-        self.AABB = Rect(x, y, 60, 60)
-        self.color = color
-    def getColor(self):
-        return self.color
-    def getX(self):
-        return self.x
-    def getY(self):
-        return self.y
-    def getAABB(self):
-        return self.AABB
-    def render(self, screen):
-        screen.blit(self.surface, (self.x, self.y))
-    def setX(self, x):
-        self.x = x
-    def setY(self, y):
-        self.y = y
+from BaseObject import BaseObject
+from Zither import Zither
 
 class Note(BaseObject):
     def __init__(self, x, y, color):
         BaseObject.__init__(self, x, y, color)
         self.isAlive = False
+        self.index = -1
     def getAlive(self):
         return self.isAlive
+    def getIndex(self):
+        return self.index
     def setAlive(self, alive):
         self.isAlive = alive
+    def setIndex(self, index):
+        self.index = index
     def setColor(self, color):
         self.color = color
         self.surface.fill(self.color)
@@ -40,7 +25,7 @@ class Note(BaseObject):
             self.AABB.left = self.x
             self.AABB.top = self.y
             if (self.y >= 560):
-                self.alive = False
+                self.isAlive = False
 
 class NoteManager():
     def __init__(self):
@@ -51,14 +36,17 @@ class NoteManager():
         for note in self.Notes:
             if note.getAlive():
                 note.render(screen)
-    def spawn(self, x, color):
+    def spawn(self, x, color, index):
         for note in self.Notes:
             if not note.getAlive():
                 note.setX(x)
                 note.setY(0)
                 note.setColor(color)
+                note.setIndex(index)
                 note.setAlive(True)
                 return None         
-    def update(self, dt):
+    def update(self, dt, zither):
         for note in self.Notes:
-            note.update(dt)           
+            note.update(dt)
+            if (note.getAABB().colliderect(zither.getButton(note.getIndex()).getAABB()) and zither.getButton(note.getIndex()).getDown()):
+                note.setAlive(False)

@@ -1,5 +1,5 @@
 import Input
-from Note import BaseObject
+from BaseObject import BaseObject
 from pygame import *
 from pygame.locals import *
 
@@ -14,8 +14,10 @@ class StringButton(BaseObject):
         return self.isDown
     def update(self, dt, input_):
         if (input_.getKeyPressed(self.button)):
+            self.isDown = True
             self.surface.fill(Color(255, 255, 255))
         else:
+            self.isDown = False
             self.surface.fill(self.color)
 
 class Zither():
@@ -34,7 +36,12 @@ class Zither():
     def getBigButton(self, index):
         return self.bigButtonGroup[index]
     def getSmallButton(self, index):
-        return self.smallButtonGroup[index]
+        return self.smallButtonGroup[index - 9]
+    def getButton(self, index):
+        if (index >= 7):
+            return self.getSmallButton(index)
+        else:
+            return self.getBigButton(index)
     def update(self, dt, input_):
         for count in range(0, 7):
             self.bigButtonGroup[count].update(dt, input_)
