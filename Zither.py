@@ -18,8 +18,8 @@ class StringButton():
         return self.AABB
     def render(self, screen):
         screen.blit(self.surface, (self.x, self.y))
-    def update(self, dt):
-        if isDown == True:
+    def update(self, dt, input_):
+        if (input_.getKeyPressed(button)):
             self.surface.fill(Color(0, 0, 0))
         else:
             self.surface.fill(self.color)
@@ -38,4 +38,12 @@ class Zither():
         self.bigButtonGroup.append(StringButton(((10 * 60), 400, self.numpadBind[1], self.greyBind[1]))
         self.bigButtonGroup.append(StringButton(((11 * 60), 400, self.numpadBind[2], self.greyBind[2]))
     def update(self, dt, input_):
-        
+        for count in range(0, 7):
+            self.bigButtonGroup[count].update(dt, input_)
+        for count in range(0, 3):
+            self.smallButtonGroup[count].update(dt, input_)
+    def render(self, screen):
+        for count in range(0, 7):
+            self.bigButtonGroup[count].render(dt, screen)
+        for count in range(0, 3):
+            self.smallButtonGroup[count].render(dt, screen)                       
