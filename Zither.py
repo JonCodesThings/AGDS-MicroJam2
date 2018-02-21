@@ -1,24 +1,17 @@
 import Input
+from Note import BaseObject
 from pygame import *
 from pygame.locals import *
 
-class StringButton():
+class StringButton(BaseObject):
     def __init__(self, x, y, button, color):
-        self.x = x
-        self.y = y
+        BaseObject.__init__(self, x, y, color)
         self.button = button
-        self.surface = Surface((60, 60))
         self.isDown = False
-        self.AABB = Rect(x, y, 60, 60)
-        self.color = color
     def setDown(self, state):
         self.isDown = state
     def getDown(self):
         return self.isDown
-    def getAABB(self):
-        return self.AABB
-    def render(self, screen):
-        screen.blit(self.surface, (self.x, self.y))
     def update(self, dt, input_):
         if (input_.getKeyPressed(self.button)):
             self.surface.fill(Color(255, 255, 255))
