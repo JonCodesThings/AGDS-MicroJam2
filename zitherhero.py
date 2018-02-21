@@ -1,15 +1,14 @@
 import sys, pygame
 from pygame.locals import *
 from Input import Input
-from Zither import Zither
+from Game import Game
 
 
 if __name__ == "__main__":
     timer = 0
     pygame.init()
     clock = pygame.time.Clock()
-    input_ = Input()
-    zither = Zither()
+    game = Game()
     screen = pygame.display.set_mode((800, 600))
     clock.tick()
     while (True):
@@ -18,11 +17,10 @@ if __name__ == "__main__":
             if (event.type == pygame.QUIT):
                 pygame.display.quit()
                 sys.exit()
-            input_.update()
-            if (input_.getKeyPressed(K_ESCAPE)):
+            if (game.input.getKeyPressed(K_ESCAPE)):
                 pygame.display.quit()
                 sys.exit()
-        zither.update(clock.get_time(), input_)
-        zither.render(screen)
+        game.update(clock.get_time())
+        game.render(screen)
         pygame.display.update()
         clock.tick()
