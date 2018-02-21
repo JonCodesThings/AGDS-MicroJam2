@@ -8,9 +8,16 @@ class BaseObject():
         self.surface = Surface((60, 60))
         self.AABB = Rect(x, y, 60, 60)
         self.color = color
+    def getColor(self):
+        return self.color
+    def getX(self):
+        return self.x
+    def getY(self):
+        return self.y
     def getAABB(self):
         return self.AABB
     def render(self, screen):
+        self.surface.fill(self.color)
         screen.blit(self.surface, (self.x, self.y))
     def setX(self, x):
         self.x = x
@@ -29,7 +36,9 @@ class Note(BaseObject):
         self.color = color
     def update(self, dt):
         if self.isAlive:
-            y -= 0.25 * dt
+            self.y += 0.25 * dt
+            self.AABB.left = self.x
+            self.AABB.top = self.y
 
 class NoteManager():
     def __init__(self):

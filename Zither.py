@@ -31,6 +31,10 @@ class Zither():
         self.smallButtonGroup.append(StringButton((9 * 60), 500, self.numpadBind[0], self.greyBind[0]))
         self.smallButtonGroup.append(StringButton((10 * 60), 500, self.numpadBind[1], self.greyBind[1]))
         self.smallButtonGroup.append(StringButton((11 * 60), 500, self.numpadBind[2], self.greyBind[2]))
+    def getBigButton(self, index):
+        return self.bigButtonGroup[index]
+    def getSmallButton(self, index):
+        return self.smallButtonGroup[index]
     def update(self, dt, input_):
         for count in range(0, 7):
             self.bigButtonGroup[count].update(dt, input_)
