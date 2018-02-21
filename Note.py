@@ -17,7 +17,6 @@ class BaseObject():
     def getAABB(self):
         return self.AABB
     def render(self, screen):
-        self.surface.fill(self.color)
         screen.blit(self.surface, (self.x, self.y))
     def setX(self, x):
         self.x = x
@@ -34,11 +33,14 @@ class Note(BaseObject):
         self.isAlive = alive
     def setColor(self, color):
         self.color = color
+        self.surface.fill(self.color)
     def update(self, dt):
         if self.isAlive:
             self.y += 0.25 * dt
             self.AABB.left = self.x
             self.AABB.top = self.y
+            if (self.y >= 560):
+                self.alive = False
 
 class NoteManager():
     def __init__(self):

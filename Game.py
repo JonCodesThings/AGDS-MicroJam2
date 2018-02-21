@@ -15,7 +15,7 @@ class Game():
         self.zither.render(screen)
         self.notemanager.render(screen)
     def update(self, dt):
-        self.input.update()
+        
         self.timer += dt
         if (self.timer >= 1000):
             random_ = random.randint(0, 10)
@@ -25,5 +25,6 @@ class Game():
                 button = self.zither.getSmallButton(random_ - 9)
             self.notemanager.spawn(button.getX(), button.getColor())
             self.timer = 0
+        self.input.update()
         self.zither.update(dt, self.input)
         self.notemanager.update(dt)
