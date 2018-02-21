@@ -28,7 +28,6 @@ class Zither():
         self.greyBind = [Color(192, 192, 192), Color(169, 169, 169), Color(128, 128, 128), Color(105, 105, 105)]
         for count in range(0, 7):
             self.bigButtonGroup.append(StringButton(((count+1) * 60), 500, self.inputBind[count], self.colorBind[count]))
-            print((count+1) * 60)
         self.smallButtonGroup.append(StringButton((9 * 60), 500, self.numpadBind[0], self.greyBind[0]))
         self.smallButtonGroup.append(StringButton((10 * 60), 500, self.numpadBind[1], self.greyBind[1]))
         self.smallButtonGroup.append(StringButton((11 * 60), 500, self.numpadBind[2], self.greyBind[2]))
