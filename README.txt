@@ -10,8 +10,8 @@ probably nothing like this game actually but that's a cool concept someone shoul
 
 CONTROLS
 
-Z,X,C,V,B,N - big fret
+Z X C V B N - big fret
 
-NUMPAD 1, NUMPAD2, NUMPAD3 - little fret
+, . ? - little fret
 
 if you can play guitar hero you can play this game
